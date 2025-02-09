@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <style>
+        /* Reset body styling */
+        
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        /* Dashboard Container */
+        
+        .dashboard-container {
+            background-color: white;
+            /* Ensures the container has a white background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            max-width: 90%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 50px auto;
+        }
+        /* Student Info Box */
+        
+        .student-info {
+            background: white;
+            /* Keeps the student details box white */
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            text-align: left;
+            margin-top: 10px;
+            color: black;
+            /* Ensures the text inside student-info is black */
+        }
+        /* Heading and Text Styling */
+        
+        h2 {
+            color: black;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        
+        p {
+            color: black;
+            font-size: 18px;
+            margin: 5px 0;
+        }
+        /* Button Styling */
+        
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <h2>Welcome, <span id="studentName"></span>!</h2>
+        <div class="student-info">
+            <p><strong>Email:</strong> <span id="studentEmail"></span></p>
+            <p><strong>Department:</strong> <span id="studentDept"></span></p>
+            <p><strong>Section:</strong> <span id="studentSection"></span></p>
+        </div>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let student = JSON.parse(localStorage.getItem("student"));
+            if (!student) {
+                window.location.href = "login.html"; // Redirect if not logged in
+            } else {
+                document.getElementById("studentName").innerText = student.name;
+                document.getElementById("studentEmail").innerText = student.email;
+                document.getElementById("studentDept").innerText = student.department;
+                document.getElementById("studentSection").innerText = student.section;
+            }
+        });
+
+        function logout() {
+            localStorage.removeItem("student");
+            window.location.href = "login.html";
+        }
+    </script>
+
+</body>
+
+</html>
